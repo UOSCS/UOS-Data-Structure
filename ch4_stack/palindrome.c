@@ -1,7 +1,6 @@
-// 2020-09-23 Data Structure
+// Chapter 4. Stack
 // Checking the input string is palindrome
-// 2017920044 이관희
-// 미완성
+// Incompletion
 
 
 #include <stdio.h>

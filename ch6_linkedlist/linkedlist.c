@@ -1,3 +1,6 @@
+// Chapter 6. LinkedList
+// Adding new nodes in sorted order
+
 #include <stdio.h>
 #include <stdlib.h>
 

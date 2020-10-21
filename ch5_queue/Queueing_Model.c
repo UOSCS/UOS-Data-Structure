@@ -1,3 +1,6 @@
+// Chapter 5. Queue
+// Simulator of Bank waiting system
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
