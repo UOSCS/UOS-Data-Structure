@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 typedef struct TreeNode
 {
@@ -12,22 +13,43 @@ TreeNode *search(TreeNode *, int);
 TreeNode *insert(TreeNode *, int);
 TreeNode *delete(TreeNode *, int);
 int find_min(TreeNode *);
+void inorder(TreeNode *);
+void preorder(TreeNode *);
+void postorder(TreeNode *);
 
 int main(void)
 {
-    TreeNode *root;
+    TreeNode *root = NULL;
     int key;
-    char ch = ',';
+    int select;
+    char ch;
 
-    printf("노드의 key값을 콤마(,) 또는 공백으로 분리하여 입력하세요. : \n");
-    while(ch != '\n')
+    while(1)
     {
-        scanf("%d", &key);
-        insert(root, key);
+        printf("노드의 key값을 콤마(,) 또는 공백으로 분리하여 입력하세요(종료하려면 q). : \n");
+        if(scanf("%d", key) != 1)
+            if((ch = getchar()) == 'q')
+                return 0;
+            else
+            {
+                printf("올바른 값을 입력하세요.\n");
+                while(ch = getchar())
+                    continue;
+                continue;
+            }
+        while(scanf("%d", &key) == 1)
+        {
+            root = insert(root, key);
 
-        ch = getchar();
-        while(ch == ',' || ch == ' ')
-            ch = getchar();
+            while(scanf("%c", &ch) == 1)
+                if(isdigit(ch))
+
+        }
+
+        printf("순회 방법을 선택하세요.\n");
+        printf("1. 전위순회     2. 중위순회\n");
+        printf("3. 후위순회     4. 레벨순회\n");
+        scanf("%d", &select);
     }
 }
 
@@ -43,7 +65,7 @@ TreeNode *new_node(TreeNode *node, int key)
 TreeNode *search(TreeNode *node, int key)
 {
     if(node == NULL)
-        return node;
+        return NULL;
 
     if(key == node->key)
         return node;
@@ -95,6 +117,8 @@ TreeNode *delete(TreeNode *node, int key)
             return node;
         }
     }
+    
+    return node;
 }
 
 int find_min(TreeNode *node)
@@ -102,4 +126,14 @@ int find_min(TreeNode *node)
     for(; node->left; node = node->left)
         continue;
     return node->key;
+}
+
+void inorder(TreeNode *root)
+{
+    if(!root)
+    {
+        inorder(root->left);
+        printf("[%d] ", root->key);
+        inorder(root->right);
+    }
 }

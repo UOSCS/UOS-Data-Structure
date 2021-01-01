@@ -3,6 +3,7 @@
 // 1.
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 // 2.
 #define MAX_CACHE_SIZE 8192
@@ -52,9 +53,12 @@ int main(int argc, char *argv[])
         printf("Let's start simulation!\n");
 
     // 시뮬레이션 시작
+    double start, stop;
     char buf[MAX_DATA_LENGTH];
 
     init(&lrulist);
+
+    start = clock();
     for(char *p = fgets(buf, MAX_DATA_LENGTH, fp); p != NULL; p = fgets(buf, MAX_DATA_LENGTH, fp))
     {
         data_num += 1.0;
@@ -79,8 +83,10 @@ int main(int argc, char *argv[])
             move(check);
         }
     }
+    stop = clock();
 
-    printf("Hit-ratio of LRU : %f%%", (hit_num / data_num) * 100.0);
+    printf("Hit-ratio of LRU : %f%%\n", (hit_num / data_num) * 100.0);
+    printf("Time consuming without Hashing : %.2fsec\n", (double)(stop - start) / CLOCKS_PER_SEC);
 
     fclose(fp);
 
