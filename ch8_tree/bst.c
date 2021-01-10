@@ -43,7 +43,7 @@ int main(void)
 
             while(scanf("%c", &ch) == 1)
                 if(isdigit(ch))
-
+                    ;
         }
 
         printf("순회 방법을 선택하세요.\n");
